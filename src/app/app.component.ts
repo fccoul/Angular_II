@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
                  </li>
                </ul>
                <hr/>
-               <div>
+               <div *ngIf="selectedTask">
                   <h4>{{selectedTask.description}}</h4>
                   <p>Task Complete ? {{selectedTask.done}}</p>
                   <h5>Edit Task</h5>
@@ -28,7 +28,8 @@ import { Component } from '@angular/core';
                   <input type="radio" [(ngModel)]="selectedTask.priority" [value]="1">1 (Low Priority) <br>
                   <input type="radio" [(ngModel)]="selectedTask.priority" [value]="2">2 (Medium Priority) <br>
                   <input type="radio" [(ngModel)]="selectedTask.priority" [value]="3">3 (High Priority) <br>
-               </div>
+                    <button (click)="finishedEditing()">Done</button>
+                  </div>
                <hr/>
                Welcome {{name}} !<br>
                <form>
@@ -63,7 +64,9 @@ export class AppComponent {
     new Task('Begin brainstorming possible JavaScript group projects', 2),
     new Task('Add README file to last few Angular repos on GitHub', 2)
   ];
-  selectedTask: Task = this.tasks[0];
+
+  // selectedTask: Task = this.tasks[0];
+  selectedTask = null;
 
   editTask(clickedTask) {
     // alert('You just requested to edit a Task!');
@@ -86,6 +89,10 @@ export class AppComponent {
       } else {
         return 'bg-info';
       }
+  }
+
+  finishedEditing() {
+    this.selectedTask = null;
   }
 }
 
