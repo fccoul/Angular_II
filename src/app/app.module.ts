@@ -5,11 +5,14 @@ import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 // AppComponent a le meme nom de la classe au niveau du composant app.component.ts
 
+import {TaskListComponent} from './task-list.component';
+
 // @NgModule decorator Angular that the code following this decorator is a module.
 @NgModule({
   declarations: [
     // iic c'est un tableau qui is an array of all components that will reside in this module.
     AppComponent // meme nom que le composant
+    , TaskListComponent
   ],
   imports: [
     /* is an array of other modules and content this module requires. Here,

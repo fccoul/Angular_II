@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Task } from './task.model';
+
 @Component({
   selector: 'app-root',
   // templateUrl: './app.component.html',
@@ -9,13 +11,9 @@ import { Component } from '@angular/core';
             <div class="container">
                <h2>To Do List {{day}}/{{month}}/{{year}}</h2>
                <h3>{{currentFocus}}</h3>
-               <ul>
-                 <!--<li>{{firstTask.description}}</li>-->
-                 <li [class]="priorityColor(currentTask)" (click)="isDone(currentTask)"
-                 *ngFor="let currentTask of tasks">{{currentTask.description}}
-                 <button (click)="editTask(currentTask)">Edit</button>
-                 </li>
-               </ul>
+
+               <app-task-list [childTaskList]=masterTasksList (clickSender)="editTask($event)"></app-task-list>
+
                <hr/>
                <div *ngIf="selectedTask">
                   <h4>{{selectedTask.description}}</h4>
@@ -59,8 +57,15 @@ export class AppComponent {
   /*
    firstTask: Task = new Task (this.valTask);
    */
+  /* gere ds composant dedié
   tasks: Task[] = [
     new Task(this.valTask, 3),
+    new Task('Begin brainstorming possible JavaScript group projects', 2),
+    new Task('Add README file to last few Angular repos on GitHub', 2)
+  ];
+  */
+  masterTasksList: Task[] = [
+    new Task('Finish weekend Angular homework for Epicodus course', 3),
     new Task('Begin brainstorming possible JavaScript group projects', 2),
     new Task('Add README file to last few Angular repos on GitHub', 2)
   ];
@@ -72,7 +77,7 @@ export class AppComponent {
     // alert('You just requested to edit a Task!');
     this.selectedTask = clickedTask;
   }
-
+/*
   isDone(clickedTask: Task) {
     if (clickedTask.done === true) {
       alert('this task is done !');
@@ -90,17 +95,20 @@ export class AppComponent {
         return 'bg-info';
       }
   }
-
+*/
   finishedEditing() {
     this.selectedTask = null;
   }
 }
 
+
+/*model dedié
 export class Task {
   public done = false;
   constructor (public description: string, public priority: number) {
 
     }
 }
+*/
 
 
